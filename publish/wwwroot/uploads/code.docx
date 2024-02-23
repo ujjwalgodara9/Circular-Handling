@@ -1,0 +1,112 @@
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddDocument(PolicyDocument viewModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var errors = ModelState.Values.SelectMany(v => v.Errors);
+        //        foreach (var error in errors)
+        //        {
+        //            Console.WriteLine(error.ErrorMessage);
+        //        }
+        //        // Optionally, you can log or display the errors for debugging.
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            // Create a new PolicyDocument entity and set its properties
+        //            var newDocument = new PolicyDocument
+        //            {
+        //                Guid = Guid.NewGuid(),
+        //                TopicId = viewModel.TopicId,
+        //                PolicyId = viewModel.PolicyId,
+        //                DocumentCaption = viewModel.DocumentCaption,
+        //                KeywordsString = viewModel.KeywordsString,
+        //                DocumentTypeId = 1,
+        //                Remarks = viewModel.Remarks,
+        //                SortOrder = 1,
+        //                Status = 1,
+        //                InsertedBy = HttpContext.Session.GetString("UserSession"),
+        //                InsertedOn = DateTime.Now,
+        //                InsertedFrom = HttpContext.Connection.RemoteIpAddress?.ToString(),
+        //                UpdatedBy = HttpContext.Session.GetString("UserSession"),
+        //                UpdatedOn = DateTime.Now,
+        //                UpdatedFrom = HttpContext.Connection.RemoteIpAddress?.ToString(),
+        //                ArchivedBy = HttpContext.Session.GetString("UserSession"),
+        //                ArchivedOn = DateTime.Now,
+        //                ArchivedFrom = HttpContext.Connection.RemoteIpAddress?.ToString()
+        //                // Set other properties as needed
+        //            };
+
+        //            // Handle file upload
+        //            if (viewModel.FileUpload != null && viewModel.FileUpload.Length > 0)
+        //            {
+        //                using (var stream = new MemoryStream())
+        //                {
+        //                    await viewModel.FileUpload.CopyToAsync(stream);
+        //                    newDocument.HtmlContent = ConvertToHtml(stream.ToArray());
+        //                    newDocument.TextContent = ConvertToText(stream.ToArray());
+        //                    newDocument.Extension = Path.GetExtension(viewModel.FileUpload.FileName);
+        //                    newDocument.ContentType = viewModel.File.ContentType;
+        //                    newDocument.FileSize = (int)viewModel.File.Length;
+        //                    newDocument.FileName = viewModel.File.FileName;
+        //                }
+        //            }
+
+        //            // Add the new document to the database
+        //            await context.PolicyDocuments.AddAsync(newDocument);
+        //            await context.SaveChangesAsync();
+
+        //            TempData["insert_success"] = "Document inserted successfully.";
+        //            return RedirectToAction("DashBoard"); // Redirect to the appropriate action
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Log the exception or handle it appropriately
+        //            TempData["error_message"] = $"An error occurred: {ex.Message}";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        TempData["insert_success"] = "Document yoho successfully.";
+        //    }
+
+        //    // If ModelState is not valid, redisplay the form with the provided ViewModel
+        //    return AddDocument();
+        //}
+
+
+        //private string ConvertToHtml(byte[] fileContent)
+        //{
+        //    // Implement logic to convert file content to HTML
+        //    // For example, if it's a text file, you can wrap the content in <pre> tags
+        //    return "<pre>" + System.Text.Encoding.UTF8.GetString(fileContent) + "</pre>";
+        //}
+
+        //private string ConvertToText(byte[] fileContent)
+        //{
+        //    // Implement logic to extract text content from the file
+        //    // For example, if it's a text file, return the content as-is
+        //    return System.Text.Encoding.UTF8.GetString(fileContent);
+        //}
+
+[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Guid] [uniqueidentifier] NOT NULL,
+	[TopicId] [int] NOT NULL,
+	[PolicyId] [int] NOT NULL,
+	[DocumentCaption] [nvarchar](2000) NOT NULL,
+	[DocumentDate] [date] NOT NULL,
+	[KeywordsString] [nvarchar](max) NOT NULL,
+	[DocumentTypeId] [int] NOT NULL,
+	[Remarks] [nvarchar](4000) NOT NULL,
+	
+	
+	
+	
+	
+	[WordFileName] [nvarchar](2000) NULL,
+	[WordFileUpdatedBy] [varchar](10) NULL,
+	[WordFileUpdatedOn] [datetime2](7) NULL,
+	[WordFileUpdatedFrom] [varchar](50) NULL,
